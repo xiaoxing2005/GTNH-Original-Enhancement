@@ -93,7 +93,7 @@ public class ItemRingOfLife extends ItemBaubleBase {
 
     @SubscribeEvent
     public void updatePlayerFlyStatus(LivingEvent.LivingUpdateEvent event) {
-        if (!event.entity.worldObj.isRemote) {
+        if (event.entity.worldObj.isRemote) {
             if (event.entityLiving instanceof EntityPlayer) {
                 FlyTick++;
                 if (FlyTick % 10 == 0) {
