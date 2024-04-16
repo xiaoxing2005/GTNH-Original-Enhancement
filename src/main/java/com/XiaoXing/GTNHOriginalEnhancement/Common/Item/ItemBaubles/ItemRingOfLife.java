@@ -100,7 +100,7 @@ public class ItemRingOfLife extends ItemBaubleBase {
                     FlyTick = 0;
                     EntityPlayer player = (EntityPlayer) event.entityLiving;
                     if (playersWithFlight.contains(playerStr(player))) {
-                        if (shouldPlayerHaveFlight(player)) {
+                        if (shouldPlayerHaveFlight(player, this)) {
                             player.capabilities.allowFlying = true;
                             ItemStack itemStack = getPlayerBaubles(player, this);
                             if (itemStack != null) {
@@ -135,12 +135,12 @@ public class ItemRingOfLife extends ItemBaubleBase {
             + player.worldObj.isRemote;
     }
 
-    private boolean shouldPlayerHaveFlight(EntityPlayer player) {
+    private boolean shouldPlayerHaveFlight(EntityPlayer player, Item item) {
         ItemStack armor;
         for (int i = 0; i < 3; i++) {
             armor = PlayerHandler.getPlayerBaubles(player)
                 .getStackInSlot(i);
-            if (armor != null) {
+            if (armor != null && armor.getItem() == item) {
                 return armor.getItem() == this;
             }
         }
