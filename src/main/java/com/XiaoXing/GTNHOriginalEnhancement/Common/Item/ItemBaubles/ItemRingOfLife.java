@@ -112,7 +112,7 @@ public class ItemRingOfLife extends ItemBaubleBase {
                             player.capabilities.isFlying = false;
                             player.capabilities.disableDamage = false;
                         }
-                    } else if (shouldPlayerHaveFlight(player)) {
+                    } else if (shouldPlayerHaveFlight(player, this)) {
                         playersWithFlight.add(playerStr(player));
                         player.capabilities.allowFlying = true;
                     }
@@ -141,7 +141,7 @@ public class ItemRingOfLife extends ItemBaubleBase {
             armor = PlayerHandler.getPlayerBaubles(player)
                 .getStackInSlot(i);
             if (armor != null && armor.getItem() == item) {
-                return armor.getItem() == this;
+                return true;
             }
         }
         return false;
