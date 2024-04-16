@@ -1,4 +1,4 @@
-package com.XiaoXing.GTNHOriginalEnhancement;
+package com.XiaoXing.GTNHOriginalEnhancement.Config;
 
 import java.io.File;
 

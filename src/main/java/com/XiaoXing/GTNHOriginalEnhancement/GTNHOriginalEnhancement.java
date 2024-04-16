@@ -3,6 +3,8 @@ package com.XiaoXing.GTNHOriginalEnhancement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -14,6 +16,11 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
     modid = GTNHOriginalEnhancement.MODID,
     version = Tags.VERSION,
     name = "GTNHOriginalEnhancement",
+    dependencies = "required-before:IC2; " + "required-before:gregtech; "
+        + "required-before:bartworks; "
+        + "required-before:tectech; "
+        + "before:miscutils; "
+        + "before:dreamcraft;",
     acceptedMinecraftVersions = "[1.7.10]")
 public class GTNHOriginalEnhancement {
 
@@ -21,8 +28,8 @@ public class GTNHOriginalEnhancement {
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     @SidedProxy(
-        clientSide = "com.XiaoXing.GTNHOriginalEnhancement.ClientProxy",
-        serverSide = "com.XiaoXing.GTNHOriginalEnhancement.CommonProxy")
+        clientSide = "com.XiaoXing.GTNHOriginalEnhancement.Proxy.ClientProxy",
+        serverSide = "com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
