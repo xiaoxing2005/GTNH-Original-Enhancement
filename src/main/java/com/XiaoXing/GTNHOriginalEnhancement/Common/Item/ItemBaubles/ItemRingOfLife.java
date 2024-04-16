@@ -93,27 +93,29 @@ public class ItemRingOfLife extends ItemBaubleBase {
 
     @SubscribeEvent
     public void updatePlayerFlyStatus(LivingEvent.LivingUpdateEvent event) {
-        if (event.entityLiving instanceof EntityPlayer) {
-            FlyTick++;
-            if (FlyTick % 10 == 0) {
-                FlyTick = 0;
-                EntityPlayer player = (EntityPlayer) event.entityLiving;
-                if (playersWithFlight.contains(playerStr(player))) {
-                    if (shouldPlayerHaveFlight(player)) {
-                        player.capabilities.allowFlying = true;
-                        ItemStack itemStack = getPlayerBaubles(player, this);
-                        if (itemStack != null) {
-                            player.capabilities.setFlySpeed(0.05f + (itemStack.getItemDamage() * 0.05f));
+        if (!event.entity.worldObj.isRemote) {
+            if (event.entityLiving instanceof EntityPlayer) {
+                FlyTick++;
+                if (FlyTick % 10 == 0) {
+                    FlyTick = 0;
+                    EntityPlayer player = (EntityPlayer) event.entityLiving;
+                    if (playersWithFlight.contains(playerStr(player))) {
+                        if (shouldPlayerHaveFlight(player)) {
+                            player.capabilities.allowFlying = true;
+                            ItemStack itemStack = getPlayerBaubles(player, this);
+                            if (itemStack != null) {
+                                player.capabilities.setFlySpeed(0.05f + (itemStack.getItemDamage() * 0.05f));
+                            }
+                        } else if (!player.capabilities.isCreativeMode) {
+                            playersWithFlight.remove(playerStr(player));
+                            player.capabilities.allowFlying = false;
+                            player.capabilities.isFlying = false;
+                            player.capabilities.disableDamage = false;
                         }
-                    } else if (!player.capabilities.isCreativeMode) {
-                        playersWithFlight.remove(playerStr(player));
-                        player.capabilities.allowFlying = false;
-                        player.capabilities.isFlying = false;
-                        player.capabilities.disableDamage = false;
+                    } else if (shouldPlayerHaveFlight(player)) {
+                        playersWithFlight.add(playerStr(player));
+                        player.capabilities.allowFlying = true;
                     }
-                } else if (shouldPlayerHaveFlight(player)) {
-                    playersWithFlight.add(playerStr(player));
-                    player.capabilities.allowFlying = true;
                 }
             }
         }
