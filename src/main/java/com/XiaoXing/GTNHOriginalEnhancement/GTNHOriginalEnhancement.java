@@ -3,11 +3,15 @@ package com.XiaoXing.GTNHOriginalEnhancement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.CraftingLoader;
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.MachineLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy;
+import com.XiaoXing.GTNHOriginalEnhancement.Recipes.MachineReicpes;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -43,12 +47,21 @@ public class GTNHOriginalEnhancement {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
+        new CraftingLoader();
+        new MachineLoader();
+
     }
 
     @Mod.EventHandler
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+
+    }
+
+    @Mod.EventHandler
+    public void completeInit(FMLLoadCompleteEvent event) {
+        new MachineReicpes();
     }
 
     @Mod.EventHandler

@@ -1,1 +1,9 @@
 item.RingOfLife.name=Ring Of Life
+
+Tooltip_EyeOfHarmonyInjector_Parametrization=Maximum fluid input threshold
+Tooltip_EyeOfHarmonyInjector_MachineType=EyeOfHarmonyInjector
+Tooltip_EyeOfHarmonyInjector_01=Inject gas with powerful cosmic power!
+Tooltip_EyeOfHarmonyInjector_02=It's so exciting!
+Tooltip_EyeOfHarmonyInjector_03=§bInput Bus,Output Bus
+Tooltip_EyeOfHarmonyInjector_04=§bAny Casing
+aNameEyeOfHarmonyInjector=EyeOfHarmonyInjector

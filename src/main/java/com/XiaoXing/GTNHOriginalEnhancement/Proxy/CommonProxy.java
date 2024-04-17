@@ -4,7 +4,6 @@ import static com.XiaoXing.GTNHOriginalEnhancement.Common.Item.ItemRegister.regi
 
 import com.XiaoXing.GTNHOriginalEnhancement.Config.Config;
 import com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement;
-import com.XiaoXing.GTNHOriginalEnhancement.Loader.CraftingLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Tags;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -26,9 +25,7 @@ public class CommonProxy {
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
-    public void init(FMLInitializationEvent event) {
-        new CraftingLoader();
-    }
+    public void init(FMLInitializationEvent event) {}
 
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {}
