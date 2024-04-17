@@ -19,7 +19,7 @@ public class MachineReicpes {
             .fluidInputs(
                 MaterialsUEVplus.Universium.getMolten(Integer.MAX_VALUE / 4),
                 MaterialsUEVplus.WhiteDwarfMatter.getMolten(Integer.MAX_VALUE / 4),
-                MaterialsUEVplus.RawStarMatter.getMolten(Integer.MAX_VALUE / 4))
+                MaterialsUEVplus.RawStarMatter.getFluid(Integer.MAX_VALUE / 4))
             .itemOutputs(GTNHOriginalEnhancementItemList.EyeOfHarmonyInjector.get(1))
             .eut(123)
             .duration(123)

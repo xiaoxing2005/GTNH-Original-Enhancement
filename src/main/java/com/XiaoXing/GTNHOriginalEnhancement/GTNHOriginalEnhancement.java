@@ -41,6 +41,7 @@ public class GTNHOriginalEnhancement {
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
+
     }
 
     @Mod.EventHandler
