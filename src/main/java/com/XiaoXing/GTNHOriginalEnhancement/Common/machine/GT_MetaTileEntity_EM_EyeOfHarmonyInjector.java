@@ -31,6 +31,7 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
+import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -98,9 +99,8 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
                             } else {
                                 int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - hydrogen);
                                 hydrogen = (long) Math.min(maxFluidAmount, maxFluidAmountSetting.get());
-                                OutputItemStack.add(
-                                    ItemFluidPacket
-                                        .newStack(new FluidStack(MaterialsUEVplus.RawStarMatter.mFluid, Input)));
+                                OutputItemStack
+                                    .add(ItemFluidPacket.newStack(new FluidStack(Materials.Hydrogen.mGas, Input)));
                                 itemStack.stackSize--;
                             }
                         } else {
@@ -108,9 +108,7 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
                             InputHydrogen += Input;
                             OutputItemStack.add(
                                 ItemFluidPacket.newStack(
-                                    new FluidStack(
-                                        MaterialsUEVplus.RawStarMatter.mFluid,
-                                        NBT.getInteger("Amount") - Input)));
+                                    new FluidStack(Materials.Hydrogen.mGas, NBT.getInteger("Amount") - Input)));
                             hydrogen += Input;
                             itemStack.stackSize--;
                         }
@@ -127,19 +125,16 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
                             } else {
                                 int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - helium);
                                 helium = (long) Math.min(maxFluidAmount, maxFluidAmountSetting.get());
-                                OutputItemStack.add(
-                                    ItemFluidPacket
-                                        .newStack(new FluidStack(MaterialsUEVplus.RawStarMatter.mFluid, Input)));
+                                OutputItemStack
+                                    .add(ItemFluidPacket.newStack(new FluidStack(Materials.Helium.mGas, Input)));
                                 itemStack.stackSize--;
                             }
                         } else {
                             int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - helium);
                             InputHelium += Input;
                             OutputItemStack.add(
-                                ItemFluidPacket.newStack(
-                                    new FluidStack(
-                                        MaterialsUEVplus.RawStarMatter.mFluid,
-                                        NBT.getInteger("Amount") - Input)));
+                                ItemFluidPacket
+                                    .newStack(new FluidStack(Materials.Helium.mGas, NBT.getInteger("Amount") - Input)));
                             helium += Input;
                             itemStack.stackSize--;
                         }
