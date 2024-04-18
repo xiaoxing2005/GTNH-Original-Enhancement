@@ -9,7 +9,8 @@ import gregtech.api.util.GT_Log;
 
 public enum GTNHOriginalEnhancementItemList {
 
-    EyeOfHarmonyInjector;
+    EyeOfHarmonyInjector,
+    RingOfLife;
 
     private boolean mHasNotBeenSet;
     private boolean mDeprecated;
