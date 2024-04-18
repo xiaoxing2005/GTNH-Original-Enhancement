@@ -31,7 +31,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -60,16 +59,10 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing_EM() {
-        List<ItemStack> InputItemStack = getStoredInputs();
-        List<ItemStack> OutputItemStack = new ArrayList<>();
-        if (InputItemStack.isEmpty()) {
-            return CheckRecipeResultRegistry.NO_RECIPE;
-        }
+        this.onMachineBlockUpdate();
         NBTTagCompound nbt = new NBTTagCompound();
         mEHO.get(0)
             .onMachineBlockUpdate();
-        this.checkMachine_EM(null, null);
-        if (mEHO.get(0).mMaxProgresstime > 0) return CheckRecipeResultRegistry.NO_RECIPE;
         mEHO.get(0)
             .saveNBTData(nbt);
         long InputHelium = 0;
@@ -78,6 +71,16 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
         long helium = nbt.getLong("stored.fluid.helium");
         long hydrogen = nbt.getLong("stored.fluid.hydrogen");
         long rawstarmatter = nbt.getLong("stored.fluid.rawstarmatter");
+        if (helium == Math.min(maxFluidAmount, maxFluidAmountSetting.get())
+            && hydrogen == Math.min(maxFluidAmount, maxFluidAmountSetting.get())
+            && rawstarmatter == Math.min(maxFluidAmount, maxFluidAmountSetting.get())) {
+            return CheckRecipeResultRegistry.NO_RECIPE;
+        }
+        List<ItemStack> InputItemStack = getStoredInputs();
+        List<ItemStack> OutputItemStack = new ArrayList<>();
+        if (InputItemStack.isEmpty()) {
+            return CheckRecipeResultRegistry.NO_RECIPE;
+        }
         for (ItemStack itemStack : InputItemStack) {
             if (itemStack.getItem() instanceof ItemFluidPacket) {
                 NBTTagCompound NBT = itemStack.getTagCompound()
@@ -85,48 +88,80 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
                 switch (NBT.getString("FluidName")) {
                     case "hydrogen" -> {
                         if (hydrogen == Math.min(maxFluidAmount, maxFluidAmountSetting.get()) || hydrogen < 0
-                            || maxFluidAmount - hydrogen < 0) break;
-                        if (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - (hydrogen + NBT.getLong("Amount"))
-                            > 0) {
-                            InputHydrogen += NBT.getLong("Amount");
-                            hydrogen += InputHydrogen;
-                            itemStack.stackSize--;
+                            || Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - hydrogen <= 0) break;
+                        if (hydrogen + NBT.getLong("Amount") >= 0) {
+                            if (hydrogen + NBT.getLong("Amount")
+                                < Math.min(maxFluidAmount, maxFluidAmountSetting.get())) {
+                                InputHydrogen += NBT.getLong("Amount");
+                                hydrogen += NBT.getLong("Amount");
+                                itemStack.stackSize--;
+                            } else {
+                                int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - hydrogen);
+                                hydrogen = (long) Math.min(maxFluidAmount, maxFluidAmountSetting.get());
+                                OutputItemStack.add(
+                                    ItemFluidPacket
+                                        .newStack(new FluidStack(MaterialsUEVplus.RawStarMatter.mFluid, Input)));
+                                itemStack.stackSize--;
+                            }
                         } else {
                             int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - hydrogen);
                             InputHydrogen += Input;
                             OutputItemStack.add(
                                 ItemFluidPacket.newStack(
-                                    new FluidStack(Materials.Hydrogen.mGas, NBT.getInteger("Amount") - Input)));
+                                    new FluidStack(
+                                        MaterialsUEVplus.RawStarMatter.mFluid,
+                                        NBT.getInteger("Amount") - Input)));
                             hydrogen += Input;
                             itemStack.stackSize--;
                         }
                     }
                     case "helium" -> {
                         if (helium == Math.min(maxFluidAmount, maxFluidAmountSetting.get()) || helium < 0
-                            || Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - helium < 0) break;
-                        if (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - (helium + NBT.getLong("Amount"))
-                            >= 0) {
-                            InputHelium += NBT.getLong("Amount");
-                            helium += InputHelium;
-                            itemStack.stackSize--;
+                            || Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - helium <= 0) break;
+                        if (helium + NBT.getLong("Amount") >= 0) {
+                            if (helium + NBT.getLong("Amount")
+                                < Math.min(maxFluidAmount, maxFluidAmountSetting.get())) {
+                                InputHelium += NBT.getLong("Amount");
+                                helium += NBT.getLong("Amount");
+                                itemStack.stackSize--;
+                            } else {
+                                int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - helium);
+                                helium = (long) Math.min(maxFluidAmount, maxFluidAmountSetting.get());
+                                OutputItemStack.add(
+                                    ItemFluidPacket
+                                        .newStack(new FluidStack(MaterialsUEVplus.RawStarMatter.mFluid, Input)));
+                                itemStack.stackSize--;
+                            }
                         } else {
                             int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - helium);
                             InputHelium += Input;
                             OutputItemStack.add(
-                                ItemFluidPacket
-                                    .newStack(new FluidStack(Materials.Helium.mGas, NBT.getInteger("Amount") - Input)));
+                                ItemFluidPacket.newStack(
+                                    new FluidStack(
+                                        MaterialsUEVplus.RawStarMatter.mFluid,
+                                        NBT.getInteger("Amount") - Input)));
                             helium += Input;
                             itemStack.stackSize--;
                         }
                     }
                     case "rawstarmatter" -> {
                         if (rawstarmatter == Math.min(maxFluidAmount, maxFluidAmountSetting.get()) || rawstarmatter < 0
-                            || Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - rawstarmatter < 0) break;
-                        if (Math.min(maxFluidAmount, maxFluidAmountSetting.get())
-                            - (rawstarmatter + NBT.getLong("Amount")) >= 0) {
-                            InputRawstarmatter += NBT.getLong("Amount");
-                            rawstarmatter += InputRawstarmatter;
-                            itemStack.stackSize--;
+                            || Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - rawstarmatter <= 0) break;
+                        if (rawstarmatter + NBT.getLong("Amount") >= 0) {
+                            if (rawstarmatter + NBT.getLong("Amount")
+                                < Math.min(maxFluidAmount, maxFluidAmountSetting.get())) {
+                                InputRawstarmatter += NBT.getLong("Amount");
+                                rawstarmatter += NBT.getLong("Amount");
+                                itemStack.stackSize--;
+                            } else {
+                                int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get())
+                                    - rawstarmatter);
+                                rawstarmatter = (long) Math.min(maxFluidAmount, maxFluidAmountSetting.get());
+                                OutputItemStack.add(
+                                    ItemFluidPacket
+                                        .newStack(new FluidStack(MaterialsUEVplus.RawStarMatter.mFluid, Input)));
+                                itemStack.stackSize--;
+                            }
                         } else {
                             int Input = (int) (Math.min(maxFluidAmount, maxFluidAmountSetting.get()) - rawstarmatter);
                             InputRawstarmatter += Input;
@@ -156,7 +191,6 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
             mEfficiencyIncrease = 10000;
             mMaxProgresstime = 20;
             mOutputItems = getOutputItemStack(OutputItemStack);
-            this.checkMachine_EM(null, null);
             return CheckRecipeResultRegistry.SUCCESSFUL;
         } else return CheckRecipeResultRegistry.NO_RECIPE;
     }
