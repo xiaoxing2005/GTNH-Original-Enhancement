@@ -10,6 +10,8 @@ import gregtech.api.util.GT_Log;
 public enum GTNHOriginalEnhancementItemList {
 
     EyeOfHarmonyInjector,
+    LargeSteamAlloySmelter,
+    LargeSteamForgeHammer,
     RingOfLife;
 
     private boolean mHasNotBeenSet;
