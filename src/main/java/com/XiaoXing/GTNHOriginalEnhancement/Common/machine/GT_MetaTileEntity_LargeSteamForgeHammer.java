@@ -74,9 +74,12 @@ public class GT_MetaTileEntity_LargeSteamForgeHammer
         return 8;
     }
 
-    private static final String[][] shape = new String[][] { { "AAA", "AAA", "AAA" }, { "B~B", "BCB", "BBB" },
-        { "AAA", "AAA", "AAA" } };
-
+    // spotless:off
+    private static final String[][] shape = new String[][] {
+            { "AAA", "AAA", "AAA" },
+            { "B~B", "BCB", "BBB" },
+            { "AAA", "AAA", "AAA" } };
+    // spotless:on
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
         buildPiece(mName, stackSize, hintsOnly, 1, 1, 0);
@@ -113,6 +116,7 @@ public class GT_MetaTileEntity_LargeSteamForgeHammer
         return STRUCTURE_DEFINITION;
     }
 
+    // spotless:off
     @Override
     protected GT_Multiblock_Tooltip_Builder createTooltip() {
         final GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
@@ -146,7 +150,7 @@ public class GT_MetaTileEntity_LargeSteamForgeHammer
             .toolTipFinisher(GTNHOriginalEnhancement.MODID);
         return tt;
     }
-
+    // spotless:on
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         fixAllMaintenanceIssue();

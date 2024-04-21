@@ -72,10 +72,14 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
         return 8;
     }
 
-    private static final String[][] shape = new String[][] { { "  AAA  ", " AACAA ", "  AAA  " },
-        { " ABBBA ", " A   A ", " ABBBA " }, { " ABBBA ", "DB   BD", " ABBBA " }, { " ABBBA ", " A   A ", " ABBBA " },
-        { "  A~A  ", " EACAE ", "  AAA  " } };
-
+    // spotless:off
+    private static final String[][] shape = new String[][] {
+            { "  AAA  ", " AACAA ", "  AAA  " },
+            { " ABBBA ", " A   A ", " ABBBA " },
+            { " ABBBA ", "DB   BD", " ABBBA " },
+            { " ABBBA ", " A   A ", " ABBBA " },
+            { "  A~A  ", " EACAE ", "  AAA  " } };
+    // spotless:on
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
         buildPiece(mName, stackSize, hintsOnly, 3, 4, 0);
@@ -119,6 +123,7 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
         return STRUCTURE_DEFINITION;
     }
 
+    // spotless:off
     @Override
     protected GT_Multiblock_Tooltip_Builder createTooltip() {
         final GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
@@ -152,7 +157,7 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
             .toolTipFinisher(GTNHOriginalEnhancement.MODID);
         return tt;
     }
-
+    // spotless:on
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         fixAllMaintenanceIssue();
