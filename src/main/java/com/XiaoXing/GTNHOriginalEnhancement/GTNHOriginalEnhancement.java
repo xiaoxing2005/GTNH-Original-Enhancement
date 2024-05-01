@@ -3,9 +3,7 @@ package com.XiaoXing.GTNHOriginalEnhancement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.XiaoXing.GTNHOriginalEnhancement.Inventory.GuiElementLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.CraftingLoader;
-import com.XiaoXing.GTNHOriginalEnhancement.Loader.EventLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.MachineLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy;
 import com.XiaoXing.GTNHOriginalEnhancement.Recipes.MachineReicpes;
@@ -65,8 +63,10 @@ public class GTNHOriginalEnhancement {
         proxy.init(event);
         new MachineLoader();
         new CraftingLoader();
-        /*new EventLoader();
-        new GuiElementLoader();*/
+        /*
+         * new EventLoader();
+         * new GuiElementLoader();
+         */
 
     }
 
