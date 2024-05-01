@@ -65,8 +65,8 @@ public class GTNHOriginalEnhancement {
         proxy.init(event);
         new MachineLoader();
         new CraftingLoader();
-        new EventLoader();
-        new GuiElementLoader();
+        /*new EventLoader();
+        new GuiElementLoader();*/
 
     }
 
