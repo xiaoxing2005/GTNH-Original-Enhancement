@@ -3,7 +3,9 @@ package com.XiaoXing.GTNHOriginalEnhancement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.XiaoXing.GTNHOriginalEnhancement.Inventory.GuiElementLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.CraftingLoader;
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.EventLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.MachineLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy;
 import com.XiaoXing.GTNHOriginalEnhancement.Recipes.MachineReicpes;
@@ -15,6 +17,8 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 @Mod(
     modid = GTNHOriginalEnhancement.MODID,
@@ -30,26 +34,39 @@ public class GTNHOriginalEnhancement {
 
     public static final String MODID = "GTNHOriginalEnhancement";
     public static final Logger LOG = LogManager.getLogger(MODID);
+    public static final String ResourceID = "gtnhoriginalehancement";
 
     @SidedProxy(
         clientSide = "com.XiaoXing.GTNHOriginalEnhancement.Proxy.ClientProxy",
         serverSide = "com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy")
     public static CommonProxy proxy;
 
+    private static SimpleNetworkWrapper network;
+
+    @Mod.Instance
+    public static GTNHOriginalEnhancement Instance;
+
     @Mod.EventHandler
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
+    }
+
+    public static SimpleNetworkWrapper getNetwork() {
+        return network;
     }
 
     @Mod.EventHandler
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        new CraftingLoader();
         new MachineLoader();
+        new CraftingLoader();
+        new EventLoader();
+        new GuiElementLoader();
 
     }
 
