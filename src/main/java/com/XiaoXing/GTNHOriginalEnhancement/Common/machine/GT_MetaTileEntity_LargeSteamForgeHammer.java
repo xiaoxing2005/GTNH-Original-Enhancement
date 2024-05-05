@@ -5,15 +5,10 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockUn
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
 import static gregtech.api.GregTech_API.sBlockCasings1;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN_GLOW;
 import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement;
 import com.XiaoXing.GTNHOriginalEnhancement.Util.TextEnums;
@@ -23,13 +18,11 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import gregtech.api.enums.Textures;
-import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.objects.GT_RenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GregtechMeta_SteamMultiBase;
 
@@ -157,29 +150,4 @@ public class GT_MetaTileEntity_LargeSteamForgeHammer
         return checkPiece(mName, 1, 1, 0);
     }
 
-    @Override
-    public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection sideDirection,
-        ForgeDirection facingDirection, int colorIndex, boolean active, boolean redstoneLevel) {
-        if (sideDirection == facingDirection) {
-            if (active) return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][66], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE)
-                .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
-            return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][66], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN)
-                .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
-        }
-        return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][66] };
-    }
 }

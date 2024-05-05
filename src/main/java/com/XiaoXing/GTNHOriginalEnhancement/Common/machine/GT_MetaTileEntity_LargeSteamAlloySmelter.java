@@ -1,19 +1,15 @@
 package com.XiaoXing.GTNHOriginalEnhancement.Common.machine;
 
+import static com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement.MODID;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockUnlocalizedName;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
 import static gregtech.api.GregTech_API.sBlockCasings1;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN_GLOW;
 import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
+import static net.minecraft.util.EnumChatFormatting.DARK_PURPLE;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
-import com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement;
 import com.XiaoXing.GTNHOriginalEnhancement.Util.TextEnums;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -21,13 +17,11 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import gregtech.api.enums.Textures;
-import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.objects.GT_RenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GregtechMeta_SteamMultiBase;
 
@@ -54,12 +48,12 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
 
     @Override
     protected GT_RenderedTexture getFrontOverlay() {
-        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_TOP_STEAM_ALLOY_SMELTER);
+        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_ALLOY_SMELTER);
     }
 
     @Override
     protected GT_RenderedTexture getFrontOverlayActive() {
-        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_TOP_STEAM_ALLOY_SMELTER_ACTIVE);
+        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_ALLOY_SMELTER_ACTIVE);
     }
 
     @Override
@@ -101,21 +95,21 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
                 .addElement('B', ofBlockUnlocalizedName("TConstruct", "GlassBlock", 0))
                 .addElement(
                     'C',
-                    buildSteamInput(GT_MetaTileEntity_LargeSteamAlloySmelter.class).casingIndex(1090)
+                    buildSteamInput(GT_MetaTileEntity_LargeSteamAlloySmelter.class).casingIndex(10)
                         .dot(1)
                         .buildAndChain(sBlockCasings1, 10))
                 .addElement(
                     'D',
                     buildHatchAdder(GT_MetaTileEntity_LargeSteamAlloySmelter.class)
                         .atLeast(SteamHatchElement.InputBus_Steam)
-                        .casingIndex(1090)
+                        .casingIndex(10)
                         .dot(1)
                         .buildAndChain(sBlockCasings1, 10))
                 .addElement(
                     'E',
                     buildHatchAdder(GT_MetaTileEntity_LargeSteamAlloySmelter.class)
                         .atLeast(SteamHatchElement.OutputBus_Steam)
-                        .casingIndex(1090)
+                        .casingIndex(10)
                         .dot(2)
                         .buildAndChain(sBlockCasings1, 10))
                 .build();
@@ -154,7 +148,7 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
             // # Steam Output Bus
             // #zh_CN 蒸汽输出总线
             .addOutputBus(TextEnums.tr("Tooltip_LargeSteamAlloySmelter_OutputBus"), 2)
-            .toolTipFinisher(GTNHOriginalEnhancement.MODID);
+            .toolTipFinisher(DARK_PURPLE + MODID);
         return tt;
     }
     // spotless:on
@@ -164,29 +158,4 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
         return checkPiece(mName, 3, 4, 0);
     }
 
-    @Override
-    public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection sideDirection,
-        ForgeDirection facingDirection, int colorIndex, boolean active, boolean redstoneLevel) {
-        if (sideDirection == facingDirection) {
-            if (active) return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][66], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE)
-                .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
-            return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][66], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN)
-                .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
-        }
-        return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][66] };
-    }
 }
