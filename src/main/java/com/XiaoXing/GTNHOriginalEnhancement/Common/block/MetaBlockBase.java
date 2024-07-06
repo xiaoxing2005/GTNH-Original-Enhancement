@@ -17,7 +17,7 @@ public class MetaBlockBase extends BlockBase {
     private IIcon[] Texture;
 
     public MetaBlockBase(String UnlocalizedName, String[] TextureName) {
-        super(UnlocalizedName);
+        super(UnlocalizedName, "stargate_coil_compressed");
         this.TextureName = TextureName;
     }
 
