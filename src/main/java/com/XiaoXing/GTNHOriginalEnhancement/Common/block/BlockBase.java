@@ -7,6 +7,14 @@ import net.minecraft.block.material.Material;
 
 public class BlockBase extends Block {
 
+    public BlockBase(String UnlocalizedName) {
+        super(Material.iron);
+        this.setHardness(1.0F);
+        this.setResistance(6000000.0F);
+        this.setBlockName(UnlocalizedName);
+        this.setBlockTextureName(ResourceID + ":" + UnlocalizedName);
+    }
+
     public BlockBase(String UnlocalizedName, String TextureName) {
         super(Material.iron);
         this.setHardness(1.0F);
