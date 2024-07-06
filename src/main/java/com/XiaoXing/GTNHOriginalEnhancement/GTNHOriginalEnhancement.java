@@ -3,7 +3,10 @@ package com.XiaoXing.GTNHOriginalEnhancement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.BlockLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.CraftingLoader;
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.EventLoader;
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.GuiElementLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.MachineLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy;
 import com.XiaoXing.GTNHOriginalEnhancement.Recipes.MachineReicpes;
@@ -50,7 +53,9 @@ public class GTNHOriginalEnhancement {
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-
+        BlockLoader.registryBlocks();
+        BlockLoader.registryTEBlocks();
+        BlockLoader.registryTileEntity();
     }
 
     public static SimpleNetworkWrapper getNetwork() {
@@ -60,13 +65,12 @@ public class GTNHOriginalEnhancement {
     @Mod.EventHandler
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
+
         proxy.init(event);
         new MachineLoader();
         new CraftingLoader();
-        /*
-         * new EventLoader();
-         * new GuiElementLoader();
-         */
+        new GuiElementLoader();
+        new EventLoader().run();
 
     }
 

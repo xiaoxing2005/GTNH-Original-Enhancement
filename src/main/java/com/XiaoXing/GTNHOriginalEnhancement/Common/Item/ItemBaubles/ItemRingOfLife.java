@@ -10,8 +10,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.FoodStats;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
+
+import com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement;
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.GuiElementLoader;
 
 import baubles.api.BaubleType;
 import baubles.common.lib.PlayerHandler;
@@ -28,6 +32,24 @@ public class ItemRingOfLife extends ItemBaubleBase {
         super(aName);
         this.setTextureName("gtnhoriginalehancement:" + Texture);
         MinecraftForge.EVENT_BUS.register(this);
+
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer player) {
+        if (this.shouldPlayerHaveFlight(player, itemStackIn.getItem())) {
+            if (!worldIn.isRemote) {
+                int id = GuiElementLoader.GUI_DEMO;
+                player.openGui(
+                    GTNHOriginalEnhancement.Instance,
+                    id,
+                    worldIn,
+                    (int) player.posX,
+                    (int) player.posY,
+                    (int) player.posZ);
+            }
+        }
+        return itemStackIn;
     }
 
     /**
@@ -59,7 +81,7 @@ public class ItemRingOfLife extends ItemBaubleBase {
                     float foodSaturationLevel = food.getSaturationLevel();
                     if (foodLevel != 20 || foodSaturationLevel != foodLevel) {
                         Player.getFoodStats()
-                            .addStats(2, 4);
+                            .addStats(2, 0.5F);
                     }
                 }
             }
@@ -149,7 +171,7 @@ public class ItemRingOfLife extends ItemBaubleBase {
         return false;
     }
 
-    private ItemStack getPlayerBaubles(EntityPlayer player, Item item) {
+    public static ItemStack getPlayerBaubles(EntityPlayer player, Item item) {
         ItemStack armor;
         for (int i = 0; i < 3; i++) {
             armor = PlayerHandler.getPlayerBaubles(player)

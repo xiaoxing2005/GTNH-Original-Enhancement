@@ -46,7 +46,7 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
     implements IConstructable, ISurvivalConstructable {
 
     private static final long maxFluidAmount = Long.MAX_VALUE;
-    private ArrayList<GT_MetaTileEntity_EM_EyeOfHarmony> mEHO = new ArrayList<>();
+    private final ArrayList<GT_MetaTileEntity_EM_EyeOfHarmony> mEHO = new ArrayList<>();
     Parameters.Group.ParameterIn maxFluidAmountSetting;
 
     public GT_MetaTileEntity_EM_EyeOfHarmonyInjector(int aID, String aName, String aNameRegional) {

@@ -6,6 +6,7 @@ import com.XiaoXing.GTNHOriginalEnhancement.Common.GTNHOriginalEnhancementItemLi
 import com.XiaoXing.GTNHOriginalEnhancement.Common.machine.GT_MetaTileEntity_EM_EyeOfHarmonyInjector;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.machine.GT_MetaTileEntity_LargeSteamAlloySmelter;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.machine.GT_MetaTileEntity_LargeSteamForgeHammer;
+import com.XiaoXing.GTNHOriginalEnhancement.Common.machine.GT_TileEntity_HolySeparator;
 import com.XiaoXing.GTNHOriginalEnhancement.Util.TextEnums;
 
 public class MachineLoader {
@@ -13,6 +14,7 @@ public class MachineLoader {
     public static ItemStack EyeOfHarmonyInjector;
     public static ItemStack LargeSteamAlloySmelter;
     public static ItemStack LargeSteamForgeHammer;
+    public static ItemStack Test;
 
     public MachineLoader() {
 
@@ -42,5 +44,7 @@ public class MachineLoader {
             // #zh_CN 大型蒸汽锻造锤
             TextEnums.tr("aNameLargeSteamForgeHammer")).getStackForm(1);
         GTNHOriginalEnhancementItemList.LargeSteamForgeHammer.set(LargeSteamForgeHammer);
+
+        Test = new GT_TileEntity_HolySeparator(20004, "a", "1").getStackForm(1);
     }
 }
