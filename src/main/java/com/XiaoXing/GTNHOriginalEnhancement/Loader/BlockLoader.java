@@ -13,9 +13,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockLoader {
 
-    public static Block Stargate_Coli = new BlockBase("Stargate_Coil");
-    public static Block Stargate_Behind = new BlockBase("Stargate_Behind");
-    public static Block New_Horizons_Coil = new BlockBase("New_Horizons_Coil");
+    public static Block Stargate_Coli = new BlockBase("Stargate_Coil", "stargate_coil");
+    public static Block Stargate_Behind = new BlockBase("Stargate_Behind", "stargate_behind");
+    public static Block New_Horizons_Coil = new BlockBase("New_Horizons_Coil", "new_horizons_coil");
     public static Block StargateTier0 = new Blocks_Stargate(0);
     public static Block StargateTier1 = new Blocks_Stargate(1);
     public static Block StargateTier2 = new Blocks_Stargate(2);

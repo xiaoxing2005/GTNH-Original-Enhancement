@@ -15,16 +15,16 @@ tile.Stargate.9.name=Compress Stargate Tier9
 
 tile.New_Horizons_Coil.name=New horizons Coil
 tile.Stargate_Coil.name=Stargate Coil
-tile.Stargate_coil_Compressed.0.name=Compress Stargate Coil
-tile.Stargate_coil_Compressed.1.name=Compress Stargate Coil Tier1
-tile.Stargate_coil_Compressed.2.name=Compress Stargate Coil Tier2
-tile.Stargate_coil_Compressed.3.name=Compress Stargate Coil Tier3
-tile.Stargate_coil_Compressed.4.name=Compress Stargate Coil Tier4
-tile.Stargate_coil_Compressed.5.name=Compress Stargate Coil Tier5
-tile.Stargate_coil_Compressed.6.name=Compress Stargate Coil Tier6
-tile.Stargate_coil_Compressed.7.name=Compress Stargate Coil Tier7
-tile.Stargate_coil_Compressed.8.name=Compress Stargate Coil Tier8
-tile.Stargate_coil_Compressed.9.name=Compress Stargate Coil Tier9
+tile.Stargate_Coil_Compressed.0.name=Compress Stargate Coil
+tile.Stargate_Coil_Compressed.1.name=Compress Stargate Coil Tier1
+tile.Stargate_Coil_Compressed.2.name=Compress Stargate Coil Tier2
+tile.Stargate_Coil_Compressed.3.name=Compress Stargate Coil Tier3
+tile.Stargate_Coil_Compressed.4.name=Compress Stargate Coil Tier4
+tile.Stargate_Coil_Compressed.5.name=Compress Stargate Coil Tier5
+tile.Stargate_Coil_Compressed.6.name=Compress Stargate Coil Tier6
+tile.Stargate_Coil_Compressed.7.name=Compress Stargate Coil Tier7
+tile.Stargate_Coil_Compressed.8.name=Compress Stargate Coil Tier8
+tile.Stargate_Coil_Compressed.9.name=Compress Stargate Coil Tier9
 
 Tooltip_EyeOfHarmonyInjector_Parametrization=Maximum fluid input threshold
 Tooltip_EyeOfHarmonyInjector_MachineType=EyeOfHarmonyInjector
