@@ -17,7 +17,10 @@ public class MachineLoader {
     public static ItemStack Test;
 
     public MachineLoader() {
+        registerMachine();
+    }
 
+    private void registerMachine() {
         EyeOfHarmonyInjector = new GT_MetaTileEntity_EM_EyeOfHarmonyInjector(
             20001,
             "EyeOfHarmonyInjector",

@@ -1,5 +1,6 @@
 package com.XiaoXing.GTNHOriginalEnhancement.Client.Renderes.TERenderes;
 
+import static com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement.ResourceID;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
 
 import java.util.ArrayList;
@@ -9,10 +10,12 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
@@ -24,6 +27,9 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 public class TestTESR extends TileEntitySpecialRenderer {
 
     private final IModelCustom Model;
+    private static final ResourceLocation texture = new ResourceLocation(
+        ResourceID,
+        "AlchemyArrays/GreenGroveArray.png");
 
     public TestTESR(IModelCustom model) {
         this.Model = model;
@@ -33,7 +39,57 @@ public class TestTESR extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float timeSinceLastTick) {
         if (!(tile instanceof Test T)) return;
-        render(T, x + 0.5, y + 0.5, z + 0.5, timeSinceLastTick);
+        // render(T, x + 0.5, y + 0.5, z + 0.5, timeSinceLastTick);
+        renderCircle(T, x, y, z, timeSinceLastTick);
+    }
+
+    private void renderCircle(Test tile, double x, double y, double z, float timeSinceLastTick) {
+        GL11.glPushMatrix();
+        float f1 = 1.0f;
+        Tessellator tessellator = Tessellator.instance;
+        this.bindTexture(texture);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_CULL_FACE);
+        tessellator.startDrawingQuads();
+        tessellator.setColorRGBA(0, 255, 255, 255);
+
+        GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
+
+        float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+
+        GL11.glRotatef(rotationAngle, 0F, 1F, 0F); // Rotate on planar axis
+        tessellator.setBrightness(240);
+
+        double finalRadius = 4 + ((double) (System.currentTimeMillis() % 3600) / 1800);
+
+        tessellator.addVertexWithUV(-finalRadius, 0, -finalRadius, 0.0d, 0.0d);
+        tessellator.addVertexWithUV(finalRadius, 0, -finalRadius, 1.0d, 0.0d);
+        tessellator.addVertexWithUV(finalRadius, 0, finalRadius, 1.0d, 1.0d);
+        tessellator.addVertexWithUV(-finalRadius, 0, finalRadius, 0.0d, 1.0d);
+
+        tessellator.draw();
+
+        // GL11.glDepthMask(true);
+
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+        GL11.glPopMatrix();
+    }
+
+    private static void renderQuad(Tessellator tessellator, double x, double y, double width, double height,
+        double uStart, double vStart, double uEnd, double vEnd, double texWidth, double texHeight) {
+        double uMin = uStart / texWidth;
+        double vMin = vStart / texHeight;
+        double uMax = uEnd / texWidth;
+        double vMax = vEnd / texHeight;
+
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x, y, 0, uMin, vMin);
+        tessellator.addVertexWithUV(x, y + height, 0, uMin, vMax);
+        tessellator.addVertexWithUV(x + width, y + height, 0, uMax, vMax);
+        tessellator.addVertexWithUV(x + width, y, 0, uMax, vMin);
+        tessellator.draw();
     }
 
     // spotless:off
