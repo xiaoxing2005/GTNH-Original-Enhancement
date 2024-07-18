@@ -1,22 +1,23 @@
-package com.XiaoXing.GTNHOriginalEnhancement.Common.machine.Mixin;
+package com.XiaoXing.GTNHOriginalEnhancement.Common.machine.ASM;
 
-import com.gtnewhorizon.structurelib.alignment.IAlignment;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_ExtendedPowerMultiBlockBase;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.processing.GregtechMetaTileEntity_IndustrialVacuumFreezer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
-public class IndustrialFreezer_Mixin extends GT_MetaTileEntity_ExtendedPowerMultiBlockBase<IndustrialFreezer_Mixin> {
-    public IndustrialFreezer_Mixin(int aID, String aName, String aNameRegional) {
+public class IndustrialFreezer_ASM extends GT_MetaTileEntity_ExtendedPowerMultiBlockBase<IndustrialFreezer_ASM> {
+
+    public IndustrialFreezer_ASM(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    public IndustrialFreezer_Mixin(String aName) {
+    public IndustrialFreezer_ASM(String aName) {
         super(aName);
     }
 
@@ -66,7 +67,8 @@ public class IndustrialFreezer_Mixin extends GT_MetaTileEntity_ExtendedPowerMult
     }
 
     @Override
-    public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection side, ForgeDirection facing, int colorIndex, boolean active, boolean redstoneLevel) {
+    public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection side, ForgeDirection facing,
+        int colorIndex, boolean active, boolean redstoneLevel) {
         return new ITexture[0];
     }
 }

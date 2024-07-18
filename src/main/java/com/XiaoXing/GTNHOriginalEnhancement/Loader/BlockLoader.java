@@ -1,10 +1,13 @@
 package com.XiaoXing.GTNHOriginalEnhancement.Loader;
 
+import static com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement.ResourceID;
+
 import net.minecraft.block.Block;
 
 import com.XiaoXing.GTNHOriginalEnhancement.Common.TE.Test;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.block.BlockBase;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.block.Blocks_Stargate;
+import com.XiaoXing.GTNHOriginalEnhancement.Common.block.GlassBlock.GlassBlockBase;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.block.MetaBlockBase;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.block.TEblock.ItemBlockMeta;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.block.TEblock.TEBlockTest;
@@ -30,6 +33,14 @@ public class BlockLoader {
         "Stargate_Coil_Compressed",
         new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" });
 
+    // Glass
+    public static Block GlassBlockRandlos = new GlassBlockBase(
+        "GlassBlockRandlos",
+        new String[] { ResourceID + ":GlassBlockRandlos" },
+        new short[] { 255, 255, 255 },
+        true,
+        false);
+
     public static Block Test;
 
     public static void registryBlocks() {
@@ -47,6 +58,7 @@ public class BlockLoader {
         GameRegistry.registerBlock(StargateTier8, "StargateTier8");
         GameRegistry.registerBlock(StargateTier9, "StargateTier9");
         GameRegistry.registerBlock(Stargate_Coil_Compressed, ItemBlockMeta.class, "Stargate Coil Compressed");
+        GameRegistry.registerBlock(GlassBlockRandlos, "AntifreezeGlass");
     }
 
     public static void registryTEBlocks() {

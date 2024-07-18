@@ -1,10 +1,12 @@
 package com.XiaoXing.GTNHOriginalEnhancement;
 
-import com.XiaoXing.GTNHOriginalEnhancement.Asm.Asm;
-import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.XiaoXing.GTNHOriginalEnhancement.Asm.Asm;
+import com.XiaoXing.GTNHOriginalEnhancement.Client.Renderes.BlockRenderes.RendererGlassBlock;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.BlockLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.CraftingLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.EventLoader;
@@ -22,8 +24,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-
-import java.util.Map;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 @IFMLLoadingPlugin.SortingIndex(1100)
 @IFMLLoadingPlugin.MCVersion("1.7.10")
@@ -37,7 +38,7 @@ import java.util.Map;
         + "before:miscutils; "
         + "before:dreamcraft;",
     acceptedMinecraftVersions = "[1.7.10]")
-public class GTNHOriginalEnhancement implements IFMLLoadingPlugin{
+public class GTNHOriginalEnhancement implements IFMLLoadingPlugin {
 
     public static final String MODID = "GTNHOriginalEnhancement";
     public static final Logger LOG = LogManager.getLogger(MODID);
@@ -74,6 +75,7 @@ public class GTNHOriginalEnhancement implements IFMLLoadingPlugin{
 
         proxy.init(event);
         new MachineLoader();
+        RendererGlassBlock.register();
         new CraftingLoader();
         new GuiElementLoader();
         new EventLoader().run();
@@ -100,7 +102,7 @@ public class GTNHOriginalEnhancement implements IFMLLoadingPlugin{
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[]{Asm.class.getName()};
+        return new String[] { Asm.class.getName() };
     }
 
     @Override
