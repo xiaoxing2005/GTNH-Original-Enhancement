@@ -15,6 +15,7 @@ public class MachineLoader {
     public static ItemStack LargeSteamAlloySmelter;
     public static ItemStack LargeSteamForgeHammer;
     public static ItemStack Test;
+    public static ItemStack LinbingFreezer;
 
     public MachineLoader() {
 

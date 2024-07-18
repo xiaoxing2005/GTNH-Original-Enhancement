@@ -1,5 +1,7 @@
 package com.XiaoXing.GTNHOriginalEnhancement;
 
+import com.XiaoXing.GTNHOriginalEnhancement.Asm.Asm;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +23,10 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
+import java.util.Map;
+
+@IFMLLoadingPlugin.SortingIndex(1100)
+@IFMLLoadingPlugin.MCVersion("1.7.10")
 @Mod(
     modid = GTNHOriginalEnhancement.MODID,
     version = Tags.VERSION,
@@ -31,7 +37,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
         + "before:miscutils; "
         + "before:dreamcraft;",
     acceptedMinecraftVersions = "[1.7.10]")
-public class GTNHOriginalEnhancement {
+public class GTNHOriginalEnhancement implements IFMLLoadingPlugin{
 
     public static final String MODID = "GTNHOriginalEnhancement";
     public static final Logger LOG = LogManager.getLogger(MODID);
@@ -91,4 +97,30 @@ public class GTNHOriginalEnhancement {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
     }
+
+    @Override
+    public String[] getASMTransformerClass() {
+        return new String[]{Asm.class.getName()};
+    }
+
+    @Override
+    public String getModContainerClass() {
+        return null;
+    }
+
+    @Override
+    public String getSetupClass() {
+        return null;
+    }
+
+    @Override
+    public void injectData(Map<String, Object> data) {
+
+    }
+
+    @Override
+    public String getAccessTransformerClass() {
+        return null;
+    }
+
 }
