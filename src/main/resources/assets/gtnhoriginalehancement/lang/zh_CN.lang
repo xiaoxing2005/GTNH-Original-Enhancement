@@ -1,6 +1,7 @@
 item.RingOfLife.name=生命之戒
 item.Stargate_Singularity.name=星门奇点
 item.Stargate_Compressed_Singularity.name=压缩星门奇点
+item.Dimensional Filter.name=位面过滤板
 
 tile.Stargate.0.name=压缩星门
 tile.Stargate.1.name=压缩星门-一重
@@ -26,6 +27,8 @@ tile.Stargate_Coil_Compressed.7.name=压缩星门线圈-七重
 tile.Stargate_Coil_Compressed.8.name=压缩星门线圈-八重
 tile.Stargate_Coil_Compressed.9.name=压缩星门线圈-九重
 
+Ultra-low Temperature Resistant Glass.name=耐超低温玻璃
+
 Tooltip_EyeOfHarmonyInjector_Parametrization=§b最大流体输入阈值
 Tooltip_EyeOfHarmonyInjector_MachineType=§b鸿蒙之眼注入器
 Tooltip_EyeOfHarmonyInjector_01=以强大的宇宙力量注入气体！
@@ -46,8 +49,21 @@ Tooltip_LargeSteamForgeHammer_Controller=大型蒸汽锻造锤的控制器
 Tooltip_LargeSteamForgeHammer_01=一次最多可以处理8个物品
 Tooltip_LargeSteamForgeHammer_FrontCenter=正面中央
 Tooltip_LargeSteamForgeHammer_InputBus=蒸汽输入总线
-aNameLargeSteamAlloySmelter=大型蒸汽合金炉
+aNameLargeSteamAlloySmelter=§l§b真·凛冰冷冻机
 aNameLargeSteamForgeHammer=大型蒸汽锻造锤
 StructureTooComplex=§b结构太复杂了！
 BLUE_PRINT_INFO=请参考§9Structure§1Lib§7全息投影，构建主体结构
-aNameLinbingFreezer=§l§b真·凛冰冷冻机
+aNameLinbingFreezer=§b实验性位面过滤冷冻装置-MK9
+GT5U.gui.text.Not_Fluid=§b流体不足: %s L
+Parallel=并行
+SpeedBonus=速度加成
+Vacuum=Freezer
+Tooltip_IndustrialFreezer_00=§l§m§b§o被遗忘者自未来回归。
+Tooltip_IndustrialFreezer_01=§b“注意不要冻伤了，先生。这些防护并不足以隔绝它强大的能力”
+Tooltip_IndustrialFreezer_02=每次工作消耗12800L*(n+1)的极寒之凛冰.n为主机内位面过滤器数量
+Tooltip_IndustrialFreezer_03=速度加成取决于凛冰输入仓内流体储量，最高为350%%
+Tooltip_IndustrialFreezer_04=并行为8*(n+1).n为主机内位面过滤器数量
+Tooltip_IndustrialFreezer_05=底部正中.
+Tooltip_IndustrialFreezer_06=任意机械外壳
+Tooltip_IndustrialFreezer_07=顶部中央
+Tooltip_IndustrialFreezer_08=由GTNHOriginalEnhancement重构！

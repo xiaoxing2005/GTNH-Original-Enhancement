@@ -63,16 +63,14 @@ public class RendererGlassBlock implements ISimpleBlockRenderingHandler {
         RenderBlocks renderer) {
         if (block instanceof GlassBlockBase) {
             renderer.renderStandardBlock(BlockLoader.GlassBlockRandlos, x, y, z);
-            /*
-             * renderer.renderStandardBlockWithColorMultiplier(
-             * block,
-             * x,
-             * y,
-             * z,
-             * ((GlassBlockBase) block).getColor(world.getBlockMetadata(x, y, z))[0] / 255f,
-             * ((GlassBlockBase) block).getColor(world.getBlockMetadata(x, y, z))[1] / 255f,
-             * ((GlassBlockBase) block).getColor(world.getBlockMetadata(x, y, z))[2] / 255f);
-             */
+            renderer.renderStandardBlockWithColorMultiplier(
+                block,
+                x,
+                y,
+                z,
+                ((GlassBlockBase) block).getColor(world.getBlockMetadata(x, y, z))[0] / 255f,
+                ((GlassBlockBase) block).getColor(world.getBlockMetadata(x, y, z))[1] / 255f,
+                ((GlassBlockBase) block).getColor(world.getBlockMetadata(x, y, z))[2] / 255f);
         }
         return true;
     }

@@ -26,7 +26,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
-@IFMLLoadingPlugin.SortingIndex(1100)
+@IFMLLoadingPlugin.TransformerExclusions("com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement")
+@IFMLLoadingPlugin.SortingIndex(0)
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 @Mod(
     modid = GTNHOriginalEnhancement.MODID,

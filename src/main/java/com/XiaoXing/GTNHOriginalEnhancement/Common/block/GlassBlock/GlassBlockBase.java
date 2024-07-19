@@ -30,14 +30,14 @@ public class GlassBlockBase extends Block {
 
     private final boolean connectedTex;
     @SideOnly(Side.CLIENT)
-    protected IIcon[] texture;
+    protected IIcon texture;
     private final short[] color;
     private final boolean fake;
 
-    String[] textureNames;
+    String textureNames;
     protected String name;
 
-    public GlassBlockBase(String name, String[] texture, short[] color, boolean connectedTex, boolean fake) {
+    public GlassBlockBase(String name, String texture, short[] color, boolean connectedTex, boolean fake) {
         super(Material.anvil);
         this.setHardness(15.0F);
         this.setResistance(30.0F);
@@ -58,9 +58,7 @@ public class GlassBlockBase extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-        for (int i = 0; i < this.textureNames.length; i++) {
-            list.add(new ItemStack(item, 1, i));
-        }
+        list.add(new ItemStack(item, 1, 0));
     }
 
     public short[] getColor(int blockMetadata) {
@@ -75,7 +73,7 @@ public class GlassBlockBase extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        return meta < this.texture.length ? this.texture[meta] : this.texture[0];
+        return this.texture;
     }
 
     @Override
@@ -145,21 +143,17 @@ public class GlassBlockBase extends Block {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         if (!this.connectedTex) {
-            this.texture = new IIcon[this.textureNames.length];
-            for (int i = 0; i < this.textureNames.length; i++) {
-                this.texture[i] = par1IconRegister.registerIcon(this.textureNames[i]);
-            }
+            this.texture = par1IconRegister.registerIcon(this.textureNames);
             return;
         }
-        this.texture = new IIcon[this.textureNames.length];
+        this.texture = par1IconRegister.registerIcon(this.textureNames);
         this.connectedTexture = new IIcon[16];
-        for (int i = 0; i < this.textureNames.length; i++) {
-            this.texture[i] = par1IconRegister.registerIcon(this.textureNames[i]);
-            String[] splitname = this.textureNames[0].split(":");
-            for (int j = 0; j < 16; j++) {
-                this.connectedTexture[j] = par1IconRegister
-                    .registerIcon(splitname[0] + ":connectedTex/" + splitname[1] + '/' + splitname[1] + '_' + j);
-            }
+        this.texture = par1IconRegister.registerIcon(this.textureNames);
+        String[] splitname = this.textureNames.split(":");
+        splitname[1] = splitname[1].equals("GlassBlockRandlos") ? "GlassBlockRandlos" : "Glass";
+        for (int j = 0; j < 16; j++) {
+            this.connectedTexture[j] = par1IconRegister
+                .registerIcon(splitname[0] + ":connectedTex/" + splitname[1] + '/' + splitname[1] + '_' + j);
         }
     }
 
