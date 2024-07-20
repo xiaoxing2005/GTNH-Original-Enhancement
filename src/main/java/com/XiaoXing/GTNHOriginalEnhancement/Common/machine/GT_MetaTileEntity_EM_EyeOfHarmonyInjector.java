@@ -290,7 +290,7 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
         return false;
     }
 
-    protected void fixAllIssues() {
+    public void fixAllIssues() {
         mWrench = true;
         mScrewdriver = true;
         mSoftHammer = true;

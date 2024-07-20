@@ -11,4 +11,9 @@ public class ItemBase extends Item {
         this.setUnlocalizedName(UnlocalizedName);
         this.setTextureName(ResourceID + ":" + TextureName);
     }
+
+    public ItemBase(String UnlocalizedName, String TextureName, int Size) {
+        this(UnlocalizedName, TextureName);
+        this.setMaxStackSize(Size);
+    }
 }

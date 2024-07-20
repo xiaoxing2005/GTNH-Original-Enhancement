@@ -1,6 +1,7 @@
 item.RingOfLife.name=Ring Of Life
 item.Stargate_Singularity.name=Stargate Singularity
 item.Stargate_Compressed_Singularity.name=Stargate Compressed Singularity
+item.Dimensional Filter.name=Dimensional Filter
 
 tile.Stargate.0.name=Compress Stargate
 tile.Stargate.1.name=Compress Stargate Tier1
@@ -26,6 +27,8 @@ tile.Stargate_Coil_Compressed.7.name=Compress Stargate Coil Tier7
 tile.Stargate_Coil_Compressed.8.name=Compress Stargate Coil Tier8
 tile.Stargate_Coil_Compressed.9.name=Compress Stargate Coil Tier9
 
+Ultra-low Temperature Resistant Glass.name=Ultra-low Temperature Resistant Glass
+
 Tooltip_EyeOfHarmonyInjector_Parametrization=Maximum fluid input threshold
 Tooltip_EyeOfHarmonyInjector_MachineType=EyeOfHarmonyInjector
 Tooltip_EyeOfHarmonyInjector_01=Inject gas with powerful cosmic power!
@@ -50,3 +53,18 @@ aNameLargeSteamAlloySmelter=LargeSteamAlloySmelter
 aNameLargeSteamForgeHammer=LargeSteamForgeHammer
 StructureTooComplex=§bThe structure is too complex!
 BLUE_PRINT_INFO=Follow the§9 Structure§1Lib§7 hologram projector to build the main structure.
+aNameLinbingFreezer=Dimension Filtering Freezer Mk-9(Prct.)
+GT5U.gui.text.Not_Fluid=Not enough fluid: %s L
+Parallel=Parallel
+SpeedBonus=SpeedBonus
+Vacuum=Freezer
+Tooltip_IndustrialFreezer_00=The Forsaken have returned since the future.
+Tooltip_IndustrialFreezer_01="Be careful not to get frostbite, sir. These protections are not enough to block its powerful abilities."
+Tooltip_IndustrialFreezer_02=Each operation consumes 12800L*(n+1) of Extreme Cold Ice.n is the number of Dimensional Filter in the host
+Tooltip_IndustrialFreezer_03=The speed bonus depends on the fluid reserves in Linbing's input chamber, with a maximum of 350%%
+Tooltip_IndustrialFreezer_04=The parallel line is 8*(n+1).n is the number of Dimensional Filter in the host
+Tooltip_IndustrialFreezer_05=Bottom center.
+Tooltip_IndustrialFreezer_06=Any Casing
+Tooltip_IndustrialFreezer_07=top center
+Tooltip_IndustrialFreezer_08=Refactored by GTNHOriginalEnhancement!
+VacuumFreezer=Vacuum Freezer
