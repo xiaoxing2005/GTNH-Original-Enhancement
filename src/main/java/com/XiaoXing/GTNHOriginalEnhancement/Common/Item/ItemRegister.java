@@ -16,12 +16,18 @@ public class ItemRegister {
     public static final Item ItemStargate_Compressed_Singularity = new ItemBase(
         "Stargate_Compressed_Singularity",
         "stargate_compressed_singularity");
+    public static final Item ItemDimensionalFilter = new ItemBase("Dimensional Filter", "Dimensional_Filter", 4);
 
     public static void registryItems() {
-        Item[] ItemToReg = { ItemRingOfLife, ItemStargate_Singularity, ItemStargate_Compressed_Singularity };
+        Item[] ItemToReg = { ItemRingOfLife, ItemStargate_Singularity, ItemStargate_Compressed_Singularity,
+            ItemDimensionalFilter };
         for (Item item : ItemToReg) {
             GameRegistry.registerItem(item, item.getUnlocalizedName());
         }
         GTNHOriginalEnhancementItemList.RingOfLife.set(new ItemStack(ItemRingOfLife, 1));
+        GTNHOriginalEnhancementItemList.ItemStargate_Singularity.set(new ItemStack(ItemStargate_Singularity, 1));
+        GTNHOriginalEnhancementItemList.ItemStargate_Compressed_Singularity
+            .set(new ItemStack(ItemStargate_Compressed_Singularity, 1));
+        GTNHOriginalEnhancementItemList.ItemDimensionalFilter.set(new ItemStack(ItemDimensionalFilter, 1));
     }
 }

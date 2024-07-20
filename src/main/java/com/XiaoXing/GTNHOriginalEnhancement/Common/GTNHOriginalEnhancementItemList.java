@@ -9,10 +9,31 @@ import gregtech.api.util.GT_Log;
 
 public enum GTNHOriginalEnhancementItemList {
 
+    // Machine
     EyeOfHarmonyInjector,
     LargeSteamAlloySmelter,
     LargeSteamForgeHammer,
-    RingOfLife;
+    // Item
+    RingOfLife,
+    ItemStargate_Singularity,
+    ItemStargate_Compressed_Singularity,
+    ItemDimensionalFilter,
+    // Block
+    Stargate_Coli,
+    Stargate_Behind,
+    New_Horizons_Coil,
+    StargateTier0,
+    StargateTier1,
+    StargateTier2,
+    StargateTier3,
+    StargateTier4,
+    StargateTier5,
+    StargateTier6,
+    StargateTier7,
+    StargateTier8,
+    StargateTier9,
+    Stargate_Coil_Compressed,
+    Ultra_Low_Temperature_Resistant_Glass;
 
     private boolean mHasNotBeenSet;
     private boolean mDeprecated;

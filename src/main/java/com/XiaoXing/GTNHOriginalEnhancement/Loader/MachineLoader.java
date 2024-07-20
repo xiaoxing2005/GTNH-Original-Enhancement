@@ -15,6 +15,7 @@ public class MachineLoader {
     public static ItemStack LargeSteamAlloySmelter;
     public static ItemStack LargeSteamForgeHammer;
     public static ItemStack Test;
+    public static ItemStack LinbingFreezer;
 
     public MachineLoader() {
 
@@ -32,7 +33,7 @@ public class MachineLoader {
             "LargeSteamAlloySmelter",
             // #tr aNameLargeSteamAlloySmelter
             // # LargeSteamAlloySmelter
-            // #zh_CN 大型蒸汽合金炉
+            // #zh_CN §l§b真·凛冰冷冻机
             TextEnums.tr("aNameLargeSteamAlloySmelter")).getStackForm(1);
         GTNHOriginalEnhancementItemList.LargeSteamAlloySmelter.set(LargeSteamAlloySmelter);
 

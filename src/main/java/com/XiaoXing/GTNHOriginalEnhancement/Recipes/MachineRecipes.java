@@ -11,9 +11,11 @@ import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.recipe.RecipeMaps;
 
-public class MachineReicpes {
+public class MachineRecipes {
 
-    public MachineReicpes() {
+    public MachineRecipes() {}
+
+    public void registerMachineRecipes() {
         GT_Values.RA.stdBuilder()
             .itemInputs(new ItemStack(INSTANCE, 0), humongousInputHatch.splitStack(64))
             .fluidInputs(
