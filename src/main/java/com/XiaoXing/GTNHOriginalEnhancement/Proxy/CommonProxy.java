@@ -18,9 +18,6 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
 
-        GTNHOriginalEnhancement.LOG.info(Config.test);
-        GTNHOriginalEnhancement.LOG.info("I am MyMod at version " + Tags.VERSION);
-
         registryItems();
     }
 
