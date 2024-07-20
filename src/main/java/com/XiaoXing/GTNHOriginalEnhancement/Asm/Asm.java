@@ -12,15 +12,13 @@ import org.spongepowered.asm.lib.ClassWriter;
 import org.spongepowered.asm.lib.util.TraceClassVisitor;
 
 import com.XiaoXing.GTNHOriginalEnhancement.Asm.VacuumFreezerASM.VacuumFreezerClassVisitor;
-import com.XiaoXing.GTNHOriginalEnhancement.Common.machine.ASM.IndustrialFreezer_ASM;
-
-import gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.processing.GregtechMetaTileEntity_IndustrialVacuumFreezer;
 
 public class Asm implements IClassTransformer {
 
     public static final String INDUSTRIALVACUUMFREEZER = transformClassName(
-        GregtechMetaTileEntity_IndustrialVacuumFreezer.class.getName());
-    public static final String INDUSTRIALVACUUMFREEZER_ASM = transformClassName(IndustrialFreezer_ASM.class.getName());
+        "gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.processing.GregtechMetaTileEntity_IndustrialVacuumFreezer");
+    public static final String INDUSTRIALVACUUMFREEZER_ASM = transformClassName(
+        "com.XiaoXing.GTNHOriginalEnhancement.Common.machine.ASM.IndustrialFreezer_ASM");
 
     public static String transformClassName(String name) {
         return name.replace(".", "/");
