@@ -3,8 +3,6 @@ package com.XiaoXing.GTNHOriginalEnhancement.Proxy;
 import static com.XiaoXing.GTNHOriginalEnhancement.Common.Item.ItemRegister.registryItems;
 
 import com.XiaoXing.GTNHOriginalEnhancement.Config.Config;
-import com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement;
-import com.XiaoXing.GTNHOriginalEnhancement.Tags;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
