@@ -31,7 +31,7 @@ public class Asm implements IClassTransformer {
 
         switch (transformedName) {
             case "gtPlusPlus.xmod.gregtech.registration.gregtech.GregtechFactoryGradeReplacementMultis" -> {
-                if (Enable_IndustrialFreezer_ASM) {
+                if (!Enable_IndustrialFreezer_ASM) {
                     return basicClass;
                 }
                 ClassReader classReader = new ClassReader(basicClass);
