@@ -1,5 +1,7 @@
 package com.XiaoXing.GTNHOriginalEnhancement.Asm;
 
+import static com.XiaoXing.GTNHOriginalEnhancement.Config.Config.Enable_IndustrialFreezer_ASM;
+
 import java.io.PrintWriter;
 
 import net.minecraft.launchwrapper.IClassTransformer;
@@ -29,6 +31,9 @@ public class Asm implements IClassTransformer {
 
         switch (transformedName) {
             case "gtPlusPlus.xmod.gregtech.registration.gregtech.GregtechFactoryGradeReplacementMultis" -> {
+                if (Enable_IndustrialFreezer_ASM) {
+                    return basicClass;
+                }
                 ClassReader classReader = new ClassReader(basicClass);
                 ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
                 ClassVisitor classVisitor = new VacuumFreezerClassVisitor(classWriter, "run1");
