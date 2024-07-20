@@ -12,8 +12,8 @@ import com.XiaoXing.GTNHOriginalEnhancement.Loader.CraftingLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.EventLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.GuiElementLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Loader.MachineLoader;
+import com.XiaoXing.GTNHOriginalEnhancement.Loader.RecipeLoader;
 import com.XiaoXing.GTNHOriginalEnhancement.Proxy.CommonProxy;
-import com.XiaoXing.GTNHOriginalEnhancement.Recipes.MachineReicpes;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -92,7 +92,8 @@ public class GTNHOriginalEnhancement implements IFMLLoadingPlugin {
 
     @Mod.EventHandler
     public void completeInit(FMLLoadCompleteEvent event) {
-        new MachineReicpes();
+        new RecipeLoader().LoaderMachineRecipe();
+        new RecipeLoader().LoaderItemRecipe();
     }
 
     @Mod.EventHandler

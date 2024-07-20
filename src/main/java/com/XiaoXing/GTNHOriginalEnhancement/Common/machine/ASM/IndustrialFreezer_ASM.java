@@ -91,10 +91,10 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
 
     @Override
     public String getMachineType() {
-        // #tr Vacuum Freezer
-        // # The Vacuum Freezer
+        // #tr VacuumFreezer
+        // # Vacuum Freezer
         // #zh_CN 真空冷冻机
-        return TextEnums.tr("Vacuum Freezer");
+        return TextEnums.tr("VacuumFreezer");
     }
 
     @Override
