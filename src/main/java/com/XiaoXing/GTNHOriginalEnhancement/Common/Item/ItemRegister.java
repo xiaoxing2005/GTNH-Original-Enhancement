@@ -16,7 +16,13 @@ public class ItemRegister {
     public static final Item ItemStargate_Compressed_Singularity = new ItemBase(
         "Stargate_Compressed_Singularity",
         "stargate_compressed_singularity");
-    public static final Item ItemDimensionalFilter = new ItemBase("Dimensional Filter", "Dimensional_Filter", 4);
+    public static final Item ItemDimensionalFilter = new ItemBase("Dimensional Filter", "Dimensional_Filter", 4)
+        .setTooltips(
+            new String[] {
+                // #tr DimensionalFilterTooltips
+                // # "This is quantum mechanics"
+                // #zh_CN §b“这就是量子力学”
+                "DimensionalFilterTooltips" });
 
     public static void registryItems() {
         Item[] ItemToReg = { ItemRingOfLife, ItemStargate_Singularity, ItemStargate_Compressed_Singularity,
