@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.StatCollector;
 
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
-import gregtech.api.util.GT_Utility;
+import gregtech.api.util.GTUtility;
 
 public class ResultNotFluid implements CheckRecipeResult {
 
@@ -46,7 +47,17 @@ public class ResultNotFluid implements CheckRecipeResult {
     public String getDisplayString() {
         return Objects.requireNonNull(
             StatCollector
-                .translateToLocalFormatted("GT5U.gui.text.Not_Fluid", GT_Utility.formatNumbers(this.FluidAmount)));
+                .translateToLocalFormatted("GT5U.gui.text.Not_Fluid", GTUtility.formatNumbers(this.FluidAmount)));
+    }
+
+    @Override
+    public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound tag) {
+        return tag;
+    }
+
+    @Override
+    public void readFromNBT(@NotNull NBTTagCompound tag) {
+
     }
 
     @NotNull

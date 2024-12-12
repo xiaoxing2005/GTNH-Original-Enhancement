@@ -16,7 +16,7 @@ import com.XiaoXing.GTNHOriginalEnhancement.Asm.VacuumFreezerASM.VacuumFreezerCl
 public class Asm implements IClassTransformer {
 
     public static final String INDUSTRIALVACUUMFREEZER = transformClassName(
-        "gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.processing.GregtechMetaTileEntity_IndustrialVacuumFreezer");
+        "gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.processing.MTEIndustrialVacuumFreezer");
     public static final String INDUSTRIALVACUUMFREEZER_ASM = transformClassName(
         "com.XiaoXing.GTNHOriginalEnhancement.Common.machine.ASM.IndustrialFreezer_ASM");
 

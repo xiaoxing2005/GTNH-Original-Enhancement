@@ -1,9 +1,9 @@
 package com.XiaoXing.GTNHOriginalEnhancement.Common.machine;
 
 import static com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement.MODID;
-import static com.github.technus.tectech.thing.casing.GT_Block_CasingsTT.texturePage;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
 import static net.minecraft.util.EnumChatFormatting.DARK_PURPLE;
+import static tectech.thing.casing.BlockGTCasingsTT.texturePage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,13 +17,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.XiaoXing.GTNHOriginalEnhancement.Util.TextEnums;
-import com.github.technus.tectech.thing.casing.TT_Container_Casings;
-import com.github.technus.tectech.thing.metaTileEntity.multi.GT_MetaTileEntity_EM_EyeOfHarmony;
-import com.github.technus.tectech.thing.metaTileEntity.multi.base.GT_MetaTileEntity_MultiblockBase_EM;
-import com.github.technus.tectech.thing.metaTileEntity.multi.base.INameFunction;
-import com.github.technus.tectech.thing.metaTileEntity.multi.base.IStatusFunction;
-import com.github.technus.tectech.thing.metaTileEntity.multi.base.LedStatus;
-import com.github.technus.tectech.thing.metaTileEntity.multi.base.Parameters;
 import com.glodblock.github.common.item.ItemFluidPacket;
 import com.gtnewhorizon.structurelib.alignment.constructable.IConstructable;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
@@ -38,15 +31,18 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
-import gregtech.api.util.GT_HatchElementBuilder;
-import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gregtech.api.util.IGT_HatchAdder;
+import gregtech.api.util.HatchElementBuilder;
+import gregtech.api.util.IGTHatchAdder;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import tectech.thing.casing.TTCasingsContainer;
+import tectech.thing.metaTileEntity.multi.MTEEyeOfHarmony;
+import tectech.thing.metaTileEntity.multi.base.*;
 
-public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity_MultiblockBase_EM
+public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends TTMultiblockBase
     implements IConstructable, ISurvivalConstructable {
 
-    private static final long maxFluidAmount = Long.MAX_VALUE;
-    private final ArrayList<GT_MetaTileEntity_EM_EyeOfHarmony> mEHO = new ArrayList<>();
+    private static final double maxFluidAmount = Long.MAX_VALUE;
+    private final ArrayList<MTEEyeOfHarmony> mEHO = new ArrayList<>();
     Parameters.Group.ParameterIn maxFluidAmountSetting;
 
     public GT_MetaTileEntity_EM_EyeOfHarmonyInjector(int aID, String aName, String aNameRegional) {
@@ -224,14 +220,14 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement(
                     'A',
-                    GT_HatchElementBuilder.<GT_MetaTileEntity_EM_EyeOfHarmonyInjector>builder()
+                    HatchElementBuilder.<GT_MetaTileEntity_EM_EyeOfHarmonyInjector>builder()
                         .adder(GT_MetaTileEntity_EM_EyeOfHarmonyInjector::addToMachineList)
                         .casingIndex(texturePage << 7)
                         .dot(2)
-                        .buildAndChain(TT_Container_Casings.sBlockCasingsBA0, 12))
+                        .buildAndChain(TTCasingsContainer.sBlockCasingsBA0, 12))
                 .addElement(
                     'B',
-                    GT_HatchElementBuilder.<GT_MetaTileEntity_EM_EyeOfHarmonyInjector>builder()
+                    HatchElementBuilder.<GT_MetaTileEntity_EM_EyeOfHarmonyInjector>builder()
                         .atLeast(EHO.EHO)
                         .casingIndex(1536)
                         .dot(1)
@@ -249,8 +245,8 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
         if (aMetaTileEntity == null) {
             return false;
         }
-        if (aMetaTileEntity instanceof GT_MetaTileEntity_EM_EyeOfHarmony) {
-            return mEHO.add((GT_MetaTileEntity_EM_EyeOfHarmony) aMetaTileEntity);
+        if (aMetaTileEntity instanceof MTEEyeOfHarmony) {
+            return mEHO.add((MTEEyeOfHarmony) aMetaTileEntity);
         }
         return false;
     }
@@ -291,12 +287,7 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
     }
 
     public void fixAllIssues() {
-        mWrench = true;
-        mScrewdriver = true;
-        mSoftHammer = true;
-        mHardHammer = true;
-        mSolderingTool = true;
-        mCrowbar = true;
+        super.fixAllIssues();
     }
 
     // spotless:off
@@ -306,19 +297,19 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
     private static final INameFunction<GT_MetaTileEntity_EM_EyeOfHarmonyInjector> MAX_FLUID_AMOUNT_SETTING_NAME = (base, p) ->
                       TextEnums.tr("Tooltip_EyeOfHarmonyInjector_Parametrization");
 
-    private static final IStatusFunction<GT_MetaTileEntity_EM_EyeOfHarmonyInjector>MAX_FLUID_AMOUNT_STATUS = (base, p) -> LedStatus
-            .fromLimitsInclusiveOuterBoundary(p.get(), 0, (double) base.maxFluidAmount/2, base.maxFluidAmount, base.maxFluidAmount);
+    private static final IStatusFunction<GT_MetaTileEntity_EM_EyeOfHarmonyInjector>MAX_FLUID_AMOUNT_STATUS = (base, p) ->
+        LedStatus.fromLimitsInclusiveOuterBoundary(p.get(), 0, maxFluidAmount / 2, maxFluidAmount, maxFluidAmount);
 
     @Override
     protected void parametersInstantiation_EM() {
         super.parametersInstantiation_EM();
-        Parameters.Group hatch_0 = parametrization.getGroup(0, false);
+        tectech.thing.metaTileEntity.multi.base.Parameters.Group hatch_0 = parametrization.getGroup(0, false);
         maxFluidAmountSetting = hatch_0.makeInParameter(0, maxFluidAmount, MAX_FLUID_AMOUNT_SETTING_NAME, MAX_FLUID_AMOUNT_STATUS);
     }
 
     @Override
-    protected GT_Multiblock_Tooltip_Builder createTooltip() {
-        final GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
+    protected MultiblockTooltipBuilder createTooltip() {
+        final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
                 // #tr Tooltip_EyeOfHarmonyInjector_MachineType
                 // # EyeOfHarmonyInjector
                 // #zh_CN §b鸿蒙之眼注入器
@@ -353,7 +344,7 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
 
     public enum EHO implements IHatchElement<GT_MetaTileEntity_EM_EyeOfHarmonyInjector> {
 
-        EHO(GT_MetaTileEntity_EM_EyeOfHarmonyInjector::addEHO, GT_MetaTileEntity_EM_EyeOfHarmony.class) {
+        EHO(GT_MetaTileEntity_EM_EyeOfHarmonyInjector::addEHO, MTEEyeOfHarmony.class) {
 
             @Override
             public long count(GT_MetaTileEntity_EM_EyeOfHarmonyInjector gtTieEntityMagesTower) {
@@ -362,10 +353,10 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
         };
 
         private final List<Class<? extends IMetaTileEntity>> mteClasses;
-        private final IGT_HatchAdder<GT_MetaTileEntity_EM_EyeOfHarmonyInjector> adder;
+        private final IGTHatchAdder<GT_MetaTileEntity_EM_EyeOfHarmonyInjector> adder;
 
         @SafeVarargs
-        EHO(IGT_HatchAdder<GT_MetaTileEntity_EM_EyeOfHarmonyInjector> adder,
+        EHO(IGTHatchAdder<GT_MetaTileEntity_EM_EyeOfHarmonyInjector> adder,
             Class<? extends IMetaTileEntity>... mteClasses) {
             this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasses));
             this.adder = adder;
@@ -377,7 +368,7 @@ public class GT_MetaTileEntity_EM_EyeOfHarmonyInjector extends GT_MetaTileEntity
         }
 
         @Override
-        public IGT_HatchAdder<? super GT_MetaTileEntity_EM_EyeOfHarmonyInjector> adder() {
+        public IGTHatchAdder<? super GT_MetaTileEntity_EM_EyeOfHarmonyInjector> adder() {
             return this.adder;
         }
 

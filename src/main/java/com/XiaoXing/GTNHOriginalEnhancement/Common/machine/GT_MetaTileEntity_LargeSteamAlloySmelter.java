@@ -4,8 +4,8 @@ import static com.XiaoXing.GTNHOriginalEnhancement.GTNHOriginalEnhancement.MODID
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockUnlocalizedName;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
-import static gregtech.api.GregTech_API.sBlockCasings1;
-import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
+import static gregtech.api.GregTechAPI.sBlockCasings1;
+import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static net.minecraft.util.EnumChatFormatting.DARK_PURPLE;
 
 import net.minecraft.item.ItemStack;
@@ -19,14 +19,14 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.objects.GT_RenderedTexture;
+import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GregtechMeta_SteamMultiBase;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTESteamMultiBase;
 
 public class GT_MetaTileEntity_LargeSteamAlloySmelter
-    extends GregtechMeta_SteamMultiBase<GT_MetaTileEntity_LargeSteamAlloySmelter> implements ISurvivalConstructable {
+    extends MTESteamMultiBase<GT_MetaTileEntity_LargeSteamAlloySmelter> implements ISurvivalConstructable {
 
     public GT_MetaTileEntity_LargeSteamAlloySmelter(String aName) {
         super(aName);
@@ -47,13 +47,18 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
     }
 
     @Override
-    protected GT_RenderedTexture getFrontOverlay() {
-        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_ALLOY_SMELTER);
+    protected GTRenderedTexture getFrontOverlay() {
+        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_ALLOY_SMELTER);
     }
 
     @Override
-    protected GT_RenderedTexture getFrontOverlayActive() {
-        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_ALLOY_SMELTER_ACTIVE);
+    protected GTRenderedTexture getFrontOverlayActive() {
+        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_ALLOY_SMELTER_ACTIVE);
+    }
+
+    @Override
+    public int getTierRecipes() {
+        return 1;
     }
 
     @Override
@@ -119,8 +124,8 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
 
     // spotless:off
     @Override
-    protected GT_Multiblock_Tooltip_Builder createTooltip() {
-        final GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
+    protected MultiblockTooltipBuilder createTooltip() {
+        final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         // #tr Tooltip_LargeSteamAlloySmelter_MachineType
         // # Alloy Smelter
         // #zh_CN 合金炉
@@ -154,7 +159,7 @@ public class GT_MetaTileEntity_LargeSteamAlloySmelter
     // spotless:on
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        fixAllMaintenanceIssue();
+        fixAllIssues();
         return checkPiece(mName, 3, 4, 0);
     }
 

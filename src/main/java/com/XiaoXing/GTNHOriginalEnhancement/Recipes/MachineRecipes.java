@@ -1,13 +1,13 @@
 package com.XiaoXing.GTNHOriginalEnhancement.Recipes;
 
-import static com.github.bartimaeusnek.bartworks.common.loaders.ItemRegistry.humongousInputHatch;
-import static com.github.technus.tectech.thing.item.AstralArrayFabricator.INSTANCE;
+import static bartworks.common.loaders.ItemRegistry.humongousInputHatch;
+import static tectech.thing.item.ItemAstralArrayFabricator.INSTANCE;
 
 import net.minecraft.item.ItemStack;
 
 import com.XiaoXing.GTNHOriginalEnhancement.Common.GTNHOriginalEnhancementItemList;
 
-import gregtech.api.enums.GT_Values;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.recipe.RecipeMaps;
 
@@ -16,7 +16,7 @@ public class MachineRecipes {
     public MachineRecipes() {}
 
     public void registerMachineRecipes() {
-        GT_Values.RA.stdBuilder()
+        GTValues.RA.stdBuilder()
             .itemInputs(new ItemStack(INSTANCE, 0), humongousInputHatch.splitStack(64))
             .fluidInputs(
                 MaterialsUEVplus.Universium.getMolten(Integer.MAX_VALUE / 4),

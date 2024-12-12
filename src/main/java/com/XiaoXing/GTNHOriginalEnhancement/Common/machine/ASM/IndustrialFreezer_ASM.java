@@ -4,13 +4,15 @@ import static com.XiaoXing.GTNHOriginalEnhancement.Util.check.ResultNotFluid.Not
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
-import static gregtech.api.enums.GT_HatchElement.Energy;
-import static gregtech.api.enums.GT_HatchElement.InputBus;
-import static gregtech.api.enums.GT_HatchElement.Maintenance;
-import static gregtech.api.enums.GT_HatchElement.OutputBus;
-import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
-import static gregtech.api.util.GT_Utility.filterValidMTEs;
-import static gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.processing.GregtechMetaTileEntity_IndustrialVacuumFreezer.mHatchName;
+import static gregtech.api.enums.HatchElement.Energy;
+import static gregtech.api.enums.HatchElement.InputBus;
+import static gregtech.api.enums.HatchElement.Maintenance;
+import static gregtech.api.enums.HatchElement.OutputBus;
+import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTUtility.filterValidMTEs;
+import static gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock.oMCAIndustrialVacuumFreezer;
+import static gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock.oMCAIndustrialVacuumFreezerActive;
+import static gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.processing.MTEIndustrialVacuumFreezer.mHatchName;
 
 import java.util.ArrayList;
 
@@ -30,7 +32,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import goodgenerator.loader.Loaders;
-import gregtech.api.GregTech_API;
+import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -38,22 +40,20 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
-import gregtech.api.util.GT_HatchElementBuilder;
-import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.HatchElementBuilder;
+import gregtech.api.util.MultiblockTooltipBuilder;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
-import gtPlusPlus.core.lib.CORE;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GT_MetaTileEntity_Hatch_CustomFluidBase;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GregtechMeta_MultiBlockBase;
-import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
+import gtPlusPlus.core.lib.GTPPCore;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GTPPMultiBlockBase;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTEHatchCustomFluidBase;
 
-public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<IndustrialFreezer_ASM>
-    implements ISurvivalConstructable {
+public class IndustrialFreezer_ASM extends GTPPMultiBlockBase<IndustrialFreezer_ASM> implements ISurvivalConstructable {
 
     private static IStructureDefinition<IndustrialFreezer_ASM> STRUCTURE = null;
     private final int CASING_TEXTURE_ID = 17;
 
-    private final ArrayList<GT_MetaTileEntity_Hatch_CustomFluidBase> mCryotheumHatches = new ArrayList<>();
+    private final ArrayList<MTEHatchCustomFluidBase> mCryotheumHatches = new ArrayList<>();
 
     public IndustrialFreezer_ASM(int aID, String aName, String aNameRegional) {
         super(
@@ -67,6 +67,11 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
 
     public IndustrialFreezer_ASM(String aName) {
         super(aName);
+    }
+
+    @Override
+    public boolean isCorrectMachinePart(ItemStack aStack) {
+        return false;
     }
 
     @Override
@@ -122,7 +127,7 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCryotheumHatches.clear();
-        return checkPiece(mName, 3, 6, 0) && checkHatch();
+        return checkPiece(mName, 3, 6, 0) && !mCryotheumHatches.isEmpty();
     }
 
     @Override
@@ -135,9 +140,8 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
             return false;
         } else {
             IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
-            if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_CustomFluidBase
-                && aMetaTileEntity.getBaseMetaTileEntity()
-                    .getMetaTileID() == 967) {
+            if (aMetaTileEntity instanceof MTEHatchCustomFluidBase && aMetaTileEntity.getBaseMetaTileEntity()
+                .getMetaTileID() == 967) {
                 return addToMachineListInternal(mCryotheumHatches, aTileEntity, aBaseCasingIndex);
             }
         }
@@ -146,18 +150,18 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
 
     @Override
     public void updateSlots() {
-        for (GT_MetaTileEntity_Hatch_CustomFluidBase tHatch : filterValidMTEs(mCryotheumHatches)) tHatch.updateSlots();
+        for (MTEHatchCustomFluidBase tHatch : filterValidMTEs(mCryotheumHatches)) tHatch.updateSlots();
         super.updateSlots();
     }
 
     @Override
     protected IIconContainer getActiveOverlay() {
-        return TexturesGtBlock.Overlay_Machine_Controller_Advanced_Active;
+        return oMCAIndustrialVacuumFreezerActive;
     }
 
     @Override
     protected IIconContainer getInactiveOverlay() {
-        return TexturesGtBlock.Overlay_Machine_Controller_Advanced;
+        return oMCAIndustrialVacuumFreezer;
     }
 
     @Override
@@ -184,7 +188,7 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
 
             @Nonnull
             @Override
-            protected CheckRecipeResult validateRecipe(@Nonnull GT_Recipe recipe) {
+            protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
                 int Amount = getCryotheumDepleteAmount();
                 if (!depleteInputFromRestrictedHatches(mCryotheumHatches, Amount)) {
                     return NotFluid(Amount);
@@ -287,17 +291,17 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
                 .addElement(
                     'A',
                     ofBlock(GTNHOriginalEnhancementItemList.Ultra_Low_Temperature_Resistant_Glass.getBlock(), 0))
-                .addElement('B', ofBlock(GregTech_API.sBlockCasings4, 1))
+                .addElement('B', ofBlock(GregTechAPI.sBlockCasings4, 1))
                 .addElement(
                     'C',
                     ofChain(
-                        GT_HatchElementBuilder.<IndustrialFreezer_ASM>builder()
+                        HatchElementBuilder.<IndustrialFreezer_ASM>builder()
                             .atLeast(Maintenance, InputBus, OutputBus, Energy)
                             .adder(IndustrialFreezer_ASM::addToMachineList)
                             .casingIndex(CASING_TEXTURE_ID)
                             .dot(1)
                             .build(),
-                        ofBlock(GregTech_API.sBlockCasings2, 1)))
+                        ofBlock(GregTechAPI.sBlockCasings2, 1)))
                 .addElement('D', ofBlock(Loaders.speedingPipe, 0))
                 .addElement('E', ofBlock(BlockList.CallistoColdIce.getBlock(), 0))
                 .addElement(
@@ -316,8 +320,8 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
     // spotless:off
 
     @Override
-    protected GT_Multiblock_Tooltip_Builder createTooltip() {
-        GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
+    protected MultiblockTooltipBuilder createTooltip() {
+        MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
             // #tr Tooltip_IndustrialFreezer_00
             // # The Forsaken have returned since the future.
@@ -362,7 +366,7 @@ public class IndustrialFreezer_ASM extends GregtechMeta_MultiBlockBase<Industria
             // #tr Tooltip_IndustrialFreezer_08
             // # Refactored by GTNHOriginalEnhancement!
             // #zh_CN 由GTNHOriginalEnhancement重构！
-            .toolTipFinisher(CORE.GT_Tooltip_Builder.get() + TextEnums.tr("Tooltip_IndustrialFreezer_08"));
+            .toolTipFinisher(GTPPCore.GT_Tooltip_Builder.get() + TextEnums.tr("Tooltip_IndustrialFreezer_08"));
         return tt;
     }
 

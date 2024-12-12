@@ -1,7 +1,7 @@
 package com.XiaoXing.GTNHOriginalEnhancement.Loader;
 
 import static com.XiaoXing.GTNHOriginalEnhancement.Common.Item.ItemRegister.ItemRingOfLife;
-import static gregtech.api.util.GT_ModHandler.getModItem;
+import static gregtech.api.util.GTModHandler.getModItem;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -10,7 +10,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import com.XiaoXing.GTNHOriginalEnhancement.Common.GTNHOriginalEnhancementItemList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.api.GregTech_API;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
@@ -36,7 +36,7 @@ public class CraftingLoader {
                 "CDC",
                 "ABA",
                 'A',
-                ItemUtils.simpleMetaStack(GregTech_API.sBlockCasings1, 10, 1),
+                ItemUtils.simpleMetaStack(GregTechAPI.sBlockCasings1, 10, 1),
                 'B',
                 getModItem("TConstruct", "GlassBlock", 1),
                 'C',
@@ -50,7 +50,7 @@ public class CraftingLoader {
                 "CDC",
                 "ABA",
                 'A',
-                ItemUtils.simpleMetaStack(GregTech_API.sBlockCasings1, 10, 1),
+                ItemUtils.simpleMetaStack(GregTechAPI.sBlockCasings1, 10, 1),
                 'B',
                 new ItemStack(Blocks.anvil, 1),
                 'C',

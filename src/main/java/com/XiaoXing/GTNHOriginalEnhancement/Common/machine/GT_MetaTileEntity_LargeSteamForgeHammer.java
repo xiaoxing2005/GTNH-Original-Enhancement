@@ -4,8 +4,8 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockUnlocalizedName;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
-import static gregtech.api.GregTech_API.sBlockCasings1;
-import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
+import static gregtech.api.GregTechAPI.sBlockCasings1;
+import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -20,14 +20,14 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.objects.GT_RenderedTexture;
+import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GregtechMeta_SteamMultiBase;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTESteamMultiBase;
 
-public class GT_MetaTileEntity_LargeSteamForgeHammer
-    extends GregtechMeta_SteamMultiBase<GT_MetaTileEntity_LargeSteamForgeHammer> implements ISurvivalConstructable {
+public class GT_MetaTileEntity_LargeSteamForgeHammer extends MTESteamMultiBase<GT_MetaTileEntity_LargeSteamForgeHammer>
+    implements ISurvivalConstructable {
 
     public GT_MetaTileEntity_LargeSteamForgeHammer(String aName) {
         super(aName);
@@ -48,13 +48,18 @@ public class GT_MetaTileEntity_LargeSteamForgeHammer
     }
 
     @Override
-    protected GT_RenderedTexture getFrontOverlay() {
-        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_HAMMER);
+    protected GTRenderedTexture getFrontOverlay() {
+        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_HAMMER);
     }
 
     @Override
-    protected GT_RenderedTexture getFrontOverlayActive() {
-        return new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_HAMMER_ACTIVE);
+    protected GTRenderedTexture getFrontOverlayActive() {
+        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_HAMMER_ACTIVE);
+    }
+
+    @Override
+    public int getTierRecipes() {
+        return 1;
     }
 
     @Override
@@ -111,8 +116,8 @@ public class GT_MetaTileEntity_LargeSteamForgeHammer
 
     // spotless:off
     @Override
-    protected GT_Multiblock_Tooltip_Builder createTooltip() {
-        final GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
+    protected MultiblockTooltipBuilder createTooltip() {
+        final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         // #tr Tooltip_LargeSteamForgeHammer_MachineType
         // # Forge Hammer
         // #zh_CN 锻造锤
@@ -146,7 +151,7 @@ public class GT_MetaTileEntity_LargeSteamForgeHammer
     // spotless:on
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        fixAllMaintenanceIssue();
+
         return checkPiece(mName, 1, 1, 0);
     }
 
