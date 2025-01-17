@@ -70,11 +70,6 @@ public class IndustrialFreezer_ASM extends GTPPMultiBlockBase<IndustrialFreezer_
     }
 
     @Override
-    public boolean isCorrectMachinePart(ItemStack aStack) {
-        return false;
-    }
-
-    @Override
     public String[] getInfoData() {
         String[] origin = super.getInfoData();
         String[] ret = new String[origin.length + 2];
